@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,5 @@ use Illuminate\Support\Facades\Route;
 Route::post('auth', [AuthController::class, 'login'])->name('auth.login');
 Route::middleware('auth.token')->group(function(): void {
     Route::delete('auth', [AuthController::class, 'logout'])->name('auth.logout');
+    Route::apiResource('users', UserController::class);
 });
