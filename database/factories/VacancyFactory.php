@@ -19,6 +19,11 @@ class VacancyFactory extends Factory
         return [
             'title' => fake()->words(8, true),
             'description' => fake()->text(),
+            'type' => fake()->randomElement([
+                'clt',
+                'pj',
+                'freelancer',
+            ]),
         ];
     }
 }

@@ -7,16 +7,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Candidate\StoreRequest;
 use App\Http\Requests\Candidate\UpdateRequest;
 use App\Models\Candidate;
-use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class CandidateController extends Controller
 {
-    public function create()
+    public function create(): Response
     {
-        //
+        return response()->view('pages.cadastrar');
     }
     
     public function store(StoreRequest $request): RedirectResponse

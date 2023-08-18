@@ -12,6 +12,7 @@ class SearchRequest extends PaginateRequest
             ...parent::rules(),
             'id' => 'nullable|numeric',
             'title' => 'nullable|string',
+            'type' => 'nullable|string',
         ];
     }
 }

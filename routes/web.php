@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CandidateController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', fn() => '')->name('login');
+Route::get('/', [AuthController::class, 'index'])->name('login');
+Route::post('/', [AuthController::class, 'login'])->name('web.login');
+Route::get('cadastrar', [CandidateController::class, 'create'])->name('pages.register');
 Route::post('cadastrar', [CandidateController::class, 'store'])->name('candidates.store');
 Route::middleware(['auth', 'auth.session'])->group(function(): void {
     Route::get('vagas', fn() => '')->name('pages.vacancies');

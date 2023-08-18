@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Api;
 
+use App\Enums\VacancyType;
 use App\Models\Vacancy;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
@@ -68,6 +69,7 @@ class VacancyTest extends TestCase
                         ->postJson('/api/vacancies', [
                             'title' => 'Test Vacancy',
                             'description' => 'Test Description',
+                            'type' => VacancyType::CLT->value,
                         ]);
         $response->assertStatus(201);
         $this->assertDatabaseHas((new Vacancy)->getTable(), [
@@ -102,6 +104,7 @@ class VacancyTest extends TestCase
                         ->patchJson("/api/vacancies/$vacancy->id", [
                             'title' => 'New Title',
                             'description' => 'New Description',
+                            'type' => VacancyType::CLT->value,
                         ]);
         $response->assertStatus(200);
         $this->assertDatabaseHas($vacancy->getTable(), [

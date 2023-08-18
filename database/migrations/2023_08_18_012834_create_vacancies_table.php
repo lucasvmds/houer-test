@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->enum('type', [
+                'clt',
+                'pj',
+                'freelancer',
+            ]);
             $table->timestamps();
         });
     }

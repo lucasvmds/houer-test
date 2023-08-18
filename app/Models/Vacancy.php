@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\VacancyType;
 use App\Http\Requests\Api\Vacancy\SearchRequest;
 use App\Traits\CanSortRecords;
 use Illuminate\Database\Eloquent\Builder;
@@ -16,6 +17,11 @@ class Vacancy extends Model
     protected $fillable = [
         'title',
         'description',
+        'type',
+    ];
+
+    protected $casts = [
+        'type' => VacancyType::class,
     ];
 
     public static function getAll(SearchRequest $request): LengthAwarePaginator
@@ -34,6 +40,10 @@ class Vacancy extends Model
                                 fn(Builder $builder, string $description): Builder => $builder->where('description', 'LIKE', "%$description%"),
                             )
                             ->when(
+                                $request->validated('type'),
+                                fn(Builder $builder, string $type): Builder => $builder->where('type', $type),
+                            )
+                            ->when(
                                 $request->validated('order'),
                                 fn(Builder $builder, string $order): Builder => static::setOrderClausule($builder, $order),
                             )
@@ -44,6 +54,7 @@ class Vacancy extends Model
     {
         return [
             'title',
+            'type',
         ];
     }
 }
