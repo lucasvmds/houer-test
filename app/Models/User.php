@@ -77,7 +77,6 @@ class User extends Authenticatable
     public static function getAll(SearchRequest $request): LengthAwarePaginator
     {
         return static::query()
-                            ->orderBy('name')
                             ->when(
                                 $request->validated('id'),
                                 fn(Builder $builder, string $id): Builder => $builder->where('id', $id),

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests\Api\User;
+namespace App\Http\Requests\Candidate;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -21,8 +21,9 @@ class UpdateRequest extends FormRequest
             'name' => 'required|string',
             'email' => [
                 'required',
-                Rule::unique('users')->ignore($this->route('user')->id),
+                Rule::unique('candidates')->ignore($this->user()->id),
             ],
+            'curriculum' => 'nullable|file',
             'password' => [
                 'nullable',
                 'confirmed',

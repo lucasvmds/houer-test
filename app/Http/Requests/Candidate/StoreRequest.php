@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests\Api\User;
+namespace App\Http\Requests\Candidate;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -19,12 +18,10 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => [
-                'required',
-                Rule::unique('users')->ignore($this->route('user')->id),
-            ],
+            'email' => 'required|unique:candidates',
+            'curriculum' => 'required|file',
             'password' => [
-                'nullable',
+                'required',
                 'confirmed',
                 Password::min(10)
                     ->mixedCase()
