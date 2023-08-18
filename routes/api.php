@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CandidateController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\VacancyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,5 +23,6 @@ Route::post('auth', [AuthController::class, 'login'])->name('auth.login');
 Route::middleware('auth.token')->group(function(): void {
     Route::delete('auth', [AuthController::class, 'logout'])->name('auth.logout');
     Route::apiResource('users', UserController::class);
+    Route::apiResource('vacancies', VacancyController::class);
     Route::apiResource('candidates', CandidateController::class)->except(['store, update']);
 });

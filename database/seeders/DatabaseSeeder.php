@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $local_seeders = [
             \Database\Seeders\Develop\CandidateSeeder::class,
             \Database\Seeders\Develop\UserSeeder::class,
+            \Database\Seeders\Develop\VacancySeeder::class,
         ];
 
         $productions_seeders = [
